@@ -1,13 +1,13 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   useDispatch,
   useSelector,
   useStore,
   shallowEqual,
-  connect as originConnect
-} from "react-redux";
-import { bindActionCreators as originalBindActionCreator } from "redux";
-import { key } from "./ironReducer";
+  connect as originConnect,
+} from 'react-redux';
+import { bindActionCreators as originalBindActionCreator } from 'redux';
+import { key } from './ironReducer';
 
 /**
  * @desc 区分不同key值对应的action，放入meta中进行区分
@@ -19,8 +19,8 @@ function wrapAction(action, reducerKey) {
     ...action,
     meta: {
       ...action.meta,
-      [key]: reducerKey
-    }
+      [key]: reducerKey,
+    },
   };
 }
 
@@ -30,18 +30,17 @@ function wrapAction(action, reducerKey) {
  * @param reducerKey reducer的key值
  */
 function wrapDispatch(dispatch, reducerKey) {
-  const wrappedDispatch = action => {
+  const wrappedDispatch = (action) => {
     let wrappedAction;
-    if (typeof action === "function") {
-      wrappedAction = (globalDispatch, getState, extraArgument) =>
-        action(
-          wrappedDispatch,
-          getState,
-          globalDispatch,
-          reducerKey,
-          extraArgument
-        );
-    } else if (typeof action === "object") {
+    if (typeof action === 'function') {
+      wrappedAction = (globalDispatch, getState, extraArgument) => action(
+        wrappedDispatch,
+        getState,
+        globalDispatch,
+        reducerKey,
+        extraArgument,
+      );
+    } else if (typeof action === 'object') {
       wrappedAction = wrapAction(action, reducerKey);
     }
     return dispatch(wrappedAction);
@@ -85,7 +84,7 @@ export function WrappedConnector({
       {React.cloneElement(restProps.children as React.ReactElement<any>, {
         ...reduxProps,
         ...restProps,
-        ...newActions
+        ...newActions,
       })}
     </div>
   );
@@ -98,12 +97,8 @@ export const Connector = React.memo(WrappedConnector);
  */
 
 export const connect = (mapStateToProps, mapDispatchToProps) => {
-  const mapStateToPropsHoc = (state, { as }) => {
-    return mapStateToProps(state, { as });
-  };
-  const mapDispatchToPropsHoc = (dispatch, { as }) => {
-    return bindActionCreators(mapDispatchToProps, dispatch, as);
-  };
+  const mapStateToPropsHoc = (state, { as }) => mapStateToProps(state, { as });
+  const mapDispatchToPropsHoc = (dispatch, { as }) => bindActionCreators(mapDispatchToProps, dispatch, as);
   //
 
   return originConnect(mapStateToPropsHoc, mapDispatchToPropsHoc);

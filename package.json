@@ -1,6 +1,6 @@
 {
-  "name": "icon-connector",
-  "version": "0.0.1-beta-1",
+  "name": "iron-connector",
+  "version": "0.0.1-beta2",
   "description": "Lightweight multi-instance redux library based on react-redux",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -26,13 +26,18 @@
     }
   },
   "scripts": {
-    "build": "rm -rf lib && tsc",
+    "build": "rm -rf lib && npx tsc",
     "watch": "tsc -w",
-    "prepublishOnly": "npm run lint && npm run test && npm run build",
     "lint": "npm run lint:nofix -- --fix",
     "lint:nofix": "eslint --cache --ext .ts,.tsx ./",
     "test": "NODE_ENV=unittest jest",
     "coverage": "codecov"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "react-redux": "^5.0.0 || ^6.0.0 || ^7.0.0",
+    "redux": "^4.0.0 || ^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
@@ -54,12 +59,6 @@
     "react-testing-library": "^7.0.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3",
-    "react-redux": "^7.1.0",
-    "redux": "^4.0.4"
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "react": "^16.7.0",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4"
   },

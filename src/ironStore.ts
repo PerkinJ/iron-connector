@@ -1,5 +1,5 @@
-import { ironReducer } from "./ironReducer";
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+import { ironReducer } from './ironReducer';
 
 /**
  * @desc 对createStore进行封装
@@ -16,8 +16,8 @@ export default createStore => (reducerMap, ...restProps) => {
     store.replaceReducer(
       combineReducers({
         ...reducerMap,
-        ...store.asyncReducers
-      })
+        ...store.asyncReducers,
+      }),
     );
   };
   // 把所用新增的reducer放入到asyncReducers对象中
@@ -27,7 +27,7 @@ export default createStore => (reducerMap, ...restProps) => {
     injectAsyncReducers(store, as, reducer);
   };
   // 注销动态实例
-  (store as any).unRegisterDynamicModule = as => {
+  (store as any).unRegisterDynamicModule = (as) => {
     const noopReducer = (state = {}) => state;
     injectAsyncReducers(store, as, noopReducer);
   };

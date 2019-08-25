@@ -1,6 +1,6 @@
 // 常量
-export const key = "__ironReducerKey";
-const initAction = { type: "@ironReducer/INIT" };
+export const key = '__ironReducerKey';
+const initAction = { type: '@ironReducer/INIT' };
 
 /**
  *  解析reducerMap
@@ -10,9 +10,9 @@ function mapValues(obj, fn) {
   return Object.keys(obj).reduce(
     (accumulator, key) => ({
       ...accumulator,
-      [key]: fn(obj[key], key)
+      [key]: fn(obj[key], key),
     }),
-    {}
+    {},
   );
 }
 
@@ -23,9 +23,9 @@ function mapValues(obj, fn) {
  */
 export function ironReducer(reducers, reducerKey) {
   let isCustomMountPoint;
-  if (typeof reducers === "function") {
+  if (typeof reducers === 'function') {
     if (!reducerKey) {
-      throw new Error("请指定reducer的key值!");
+      throw new Error('请指定reducer的key值!');
     } else {
       isCustomMountPoint = true;
     }
@@ -48,7 +48,7 @@ export function ironReducer(reducers, reducerKey) {
       if (reducer) {
         return {
           ...state,
-          [actionReducerKey]: reducer(state[actionReducerKey], action)
+          [actionReducerKey]: reducer(state[actionReducerKey], action),
         };
       }
     }

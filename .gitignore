@@ -22,3 +22,6 @@ package-lock.json
 
 # Coverage directory used by tools like istanbul
 coverage
+
+# lint cache
+.eslintcache

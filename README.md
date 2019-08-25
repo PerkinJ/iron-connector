@@ -12,8 +12,8 @@ The `Connector`'s method requires:
 
 ## ironReducer
 
-`ironReducer`'s purpose is strengthen the `reducer`, and construct multi-instance redux aaplications. 
-you can try [IronReducer -  Demo](https://codesandbox.io/s/ipxgb)
+`ironReducer`'s purpose is to strengthen the `reducer`, and construct multi-instance redux applications.
+you can try [ironReducer -  Demo](https://codesandbox.io/s/ipxgb)
 
 The key code：
 
